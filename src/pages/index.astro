@@ -1,0 +1,207 @@
+---
+import Layout from '~/layouts/PageLayout.astro';
+import Hero from '~/components/widgets/Hero.astro';
+import Note from '~/components/widgets/Note.astro';
+import Features from '~/components/widgets/Features.astro';
+import Features2 from '~/components/widgets/Features2.astro';
+import Steps from '~/components/widgets/Steps.astro';
+import Content from '~/components/widgets/Content.astro';
+import Stats from '~/components/widgets/Stats.astro';
+import Image from '~/components/common/Image.astro';
+
+const metadata = {
+  title: 'TATAR Lab',
+  ignoreTitleTemplate: true,
+};
+---
+
+<Layout metadata={metadata}>
+  <!-- Logo ******************* -->
+  <div class="flex flex-col sm:flex-row items-center justify-center gap-x-4 gap-y-4 pt-5">
+    <Image
+      class="w-full"
+      widths={[400, 768, 1024, 2040]}
+      sizes="(max-width: 767px) 400px, (max-width: 1023px) 768px, (max-width: 2039px) 1024px, 2040px"
+      loading="eager"
+      width={350}
+      src="~/assets/images/ualbany.png"
+      alt="Ualbany Logo"
+    />
+    <Image
+      class="w-full"
+      widths={[400, 768, 1024, 2040]}
+      sizes="(max-width: 767px) 400px, (max-width: 1023px) 768px, (max-width: 2039px) 1024px, 2040px"
+      loading="eager"
+      width={250}
+      src="~/assets/images/logo.png"
+      alt="Lab Logo"
+    />
+  </div>
+
+  <!-- Hero Widget ******************* -->
+  <Hero>  <!-- image={{ src: '~/assets/images/lab2.jpeg', alt: 'Lab' }}> -->
+    <!-- Animated Gradient Title -->
+    <Fragment slot="title">
+      <h1
+        class="text-5xl py-3 font-extrabold bg-gradient-to-r from-pink-500 via-purple-500 to-blue-500 bg-clip-text text-transparent"
+      >
+        TATAR Lab
+      </h1>
+    </Fragment>
+
+    <!-- Bold Subtitle -->
+    <Fragment slot="subtitle">
+      <p class="text-xl py-5 font-bold text-white">
+        The TATAR Laboratory, led by Dr. Tatar, is at the forefront of advancing cybersecurity and AI risk and safety.
+      </p>
+    </Fragment>
+
+    <!-- Bold Content -->
+    <Fragment slot="content">
+      <p class="text-md py-5 font-bold text-gray-300">
+        University at Albany SUNY, ETEC Room 350P
+        <br />1220 Washington Avenue, Albany, NY 12226
+      </p>
+    </Fragment>
+  </Hero>
+
+  <!-- Note Widget ******************* -->
+  <!-- <Note content="NOTE" /> -->
+
+  <Content
+    isReversed
+    tagline="Our"
+    title="Mission & Focus"
+    items={[
+      {
+        title: 'Lorem ipsum dolor sit amet',
+        description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
+      },
+      {
+        title: 'Lorem ipsum dolor sit amet',
+        description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
+      },
+      {
+        title: 'Lorem ipsum dolor sit amet',
+        description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
+      },
+    ]}
+    image={{
+      src: '~/assets/images/img2.jpg',
+      alt: 'Colorful Image',
+    }}
+  >
+    <Fragment slot="content">
+      <h3 class="text-2xl font-bold tracking-tight dark:text-white sm:text-3xl mb-2">Lorem ipsum dolor sit amet</h3>
+      Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+    </Fragment>
+
+    <Fragment slot="bg">
+      <div class="absolute inset-0 bg-blue-50 dark:bg-transparent"></div>
+    </Fragment>
+  </Content>
+
+  <Content
+    isAfterContent
+    tagline="Our"
+    title="Director"
+    items={[
+      {
+        title: 'Dr. Unal Tatar',
+        description: `Dr. Tatar, the director of the TATAR Lab, is ...`,
+      },
+    ]}
+    image={{
+      src: '~/assets/images/tatar.jpg',
+      alt: 'Photo of Dr. Tatar',
+    }}
+  >
+    <!-- <Fragment slot="content">Ensure your online presence truly represents you.</Fragment> -->
+    <Fragment slot="bg">
+      <div class="absolute inset-0 bg-blue-50 dark:bg-transparent"></div>
+    </Fragment>
+  </Content>
+
+  <!-- Our Research Areas ******************* -->
+
+  <Features
+    tagline="What We Do"
+    title="Research Focus Areas"
+    items={[
+      {
+        title: 'Lorem ipsum dolor sit amet',
+        description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
+        icon: 'tabler:devices',
+      },
+      {
+        title: 'Lorem ipsum dolor sit amet',
+        description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
+        icon: 'tabler:gauge',
+      },
+      {
+        title: 'Lorem ipsum dolor sit amet',
+        description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
+        icon: 'tabler:database',
+      },
+      {
+        title: 'Lorem ipsum dolor sit amet',
+        description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
+        icon: 'tabler:network',
+      },
+      {
+        title: 'Lorem ipsum dolor sit amet',
+        description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
+        icon: 'tabler:cube',
+      },
+      {
+        title: 'Lorem ipsum dolor sit amet',
+        description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
+        icon: 'tabler:shield-check',
+      },
+    ]}
+  />
+
+  <!-- Real-World Impact ******************* -->
+
+  <Steps
+    title="Lorem ipsum dolor sit amet"
+    image={{
+      src: '~/assets/images/img1.jpeg',
+      alt: 'Steps image',
+    }}
+    items={[
+      {
+        title: 'Lorem ipsum dolor sit amet',
+        description: 'We collaborate with experts across fields, including ...',
+        icon: 'tabler:users',
+      },
+      {
+        title: 'Lorem ipsum dolor sit amet',
+        description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
+        icon: 'tabler:tool',
+      },
+      {
+        title: 'Lorem ipsum dolor sit amet',
+        description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
+        icon: 'tabler:bolt',
+      },
+    ]}
+  />
+
+  <!-- Lab Stats ******************* -->
+
+  <Stats
+    title="Lab Stats"
+    stats={[
+      { title: 'Papers Published', amount: '20+' },
+      { title: 'Grant Funding', amount: '$600k+' },
+      { title: 'Graduate Students', amount: '8' },
+      { title: 'Undergraduate Students', amount: '5+' },
+    ]}
+  />
+
+  <!-- Background styling if needed -->
+  <Fragment slot="bg">
+    <div class="absolute inset-0 bg-blue-50 dark:bg-transparent"></div>
+  </Fragment>
+</Layout>

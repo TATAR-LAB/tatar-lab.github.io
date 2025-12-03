@@ -1,0 +1,40 @@
+site:
+  name: TATAR Lab
+  site: 'https://tatar-lab.github.io'
+  base: '/'
+  trailingSlash: false
+
+  googleSiteVerificationId: ''
+
+# Default SEO metadata
+metadata:
+  title:
+    default: TATAR Lab
+    template: '%s — TATAR Lab'
+  description: 'University at Albany, SUNY'
+  robots:
+    index: true
+    follow: true
+  openGraph:
+    site_name: TATAR Lab
+    images:
+      - url: '~/assets/images/default.png'
+        width: 1200
+        height: 628
+    type: website
+  twitter:
+    handle: '@onwidget'
+    site: '@onwidget'
+    cardType: summary_large_image
+
+i18n:
+  language: en
+  textDirection: ltr
+
+analytics:
+  vendors:
+    googleAnalytics:
+      id: null # or "G-XXXXXXXXXX"
+
+ui:
+  theme: 'dark:only' # Values: "system" | "light" | "dark" | "light:only" | "dark:only"
