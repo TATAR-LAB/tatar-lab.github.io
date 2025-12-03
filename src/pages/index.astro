@@ -24,7 +24,7 @@ const metadata = {
       sizes="(max-width: 767px) 400px, (max-width: 1023px) 768px, (max-width: 2039px) 1024px, 2040px"
       loading="eager"
       width={350}
-      src="~/assets/images/ualbany.png"
+      src="~/assets/images/cehc.png"
       alt="Ualbany Logo"
     />
     <Image
@@ -39,13 +39,14 @@ const metadata = {
   </div>
 
   <!-- Hero Widget ******************* -->
-  <Hero>  <!-- image={{ src: '~/assets/images/lab2.jpeg', alt: 'Lab' }}> -->
+  <Hero>
+    <!-- image={{ src: '~/assets/images/lab2.jpeg', alt: 'Lab' }}> -->
     <!-- Animated Gradient Title -->
     <Fragment slot="title">
       <h1
-        class="text-5xl py-3 font-extrabold bg-gradient-to-r from-pink-500 via-purple-500 to-blue-500 bg-clip-text text-transparent"
+        class="text-5xl py-3 font-extrabold bg-gradient-to-r from-gray-100 via-blue-500 to-gray-900 bg-clip-text text-transparent"
       >
-        TATAR Lab
+        TATAR LAB
       </h1>
     </Fragment>
 
@@ -58,7 +59,7 @@ const metadata = {
 
     <!-- Bold Content -->
     <Fragment slot="content">
-      <p class="text-md py-5 font-bold text-gray-300">
+      <p class="text-md py-5 font-bold text-gray-600">
         University at Albany SUNY, ETEC Room 350P
         <br />1220 Washington Avenue, Albany, NY 12226
       </p>
@@ -75,15 +76,18 @@ const metadata = {
     items={[
       {
         title: 'Lorem ipsum dolor sit amet',
-        description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
+        description:
+          'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
       },
       {
         title: 'Lorem ipsum dolor sit amet',
-        description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
+        description:
+          'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
       },
       {
         title: 'Lorem ipsum dolor sit amet',
-        description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
+        description:
+          'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
       },
     ]}
     image={{
@@ -93,7 +97,8 @@ const metadata = {
   >
     <Fragment slot="content">
       <h3 class="text-2xl font-bold tracking-tight dark:text-white sm:text-3xl mb-2">Lorem ipsum dolor sit amet</h3>
-      Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+      Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna
+      aliqua.
     </Fragment>
 
     <Fragment slot="bg">
@@ -109,6 +114,11 @@ const metadata = {
       {
         title: 'Dr. Unal Tatar',
         description: `Dr. Tatar, the director of the TATAR Lab, is ...`,
+        callToAction: {
+          target: '_blank',
+          text: 'Website',
+          href: 'https://www.albany.edu/cehc/faculty/unal-tatar',
+        },
       },
     ]}
     image={{
@@ -130,32 +140,38 @@ const metadata = {
     items={[
       {
         title: 'Lorem ipsum dolor sit amet',
-        description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
+        description:
+          'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
         icon: 'tabler:devices',
       },
       {
         title: 'Lorem ipsum dolor sit amet',
-        description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
+        description:
+          'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
         icon: 'tabler:gauge',
       },
       {
         title: 'Lorem ipsum dolor sit amet',
-        description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
+        description:
+          'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
         icon: 'tabler:database',
       },
       {
         title: 'Lorem ipsum dolor sit amet',
-        description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
+        description:
+          'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
         icon: 'tabler:network',
       },
       {
         title: 'Lorem ipsum dolor sit amet',
-        description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
+        description:
+          'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
         icon: 'tabler:cube',
       },
       {
         title: 'Lorem ipsum dolor sit amet',
-        description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
+        description:
+          'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
         icon: 'tabler:shield-check',
       },
     ]}
@@ -177,12 +193,14 @@ const metadata = {
       },
       {
         title: 'Lorem ipsum dolor sit amet',
-        description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
+        description:
+          'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
         icon: 'tabler:tool',
       },
       {
         title: 'Lorem ipsum dolor sit amet',
-        description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
+        description:
+          'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
         icon: 'tabler:bolt',
       },
     ]}
