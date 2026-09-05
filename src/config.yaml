@@ -10,21 +10,15 @@ site:
 metadata:
   title:
     default: TATAR Lab
-    template: '%s — TATAR Lab'
-  description: 'University at Albany, SUNY'
+    template: '%s | TATAR Lab'
+  description: 'The TATAR Lab at the University at Albany, SUNY researches AI security and safety, cyber risk and insurance, and the protection of critical infrastructure.'
   robots:
     index: true
     follow: true
   openGraph:
     site_name: TATAR Lab
-    images:
-      - url: '~/assets/images/default.png'
-        width: 1200
-        height: 628
     type: website
   twitter:
-    handle: '@onwidget'
-    site: '@onwidget'
     cardType: summary_large_image
 
 i18n:

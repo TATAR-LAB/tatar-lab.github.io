@@ -1,18 +1,11 @@
-import { getPermalink } from './utils/permalinks';
-
 export const headerData = {
   links: [
-    {
-      text: '',
-      href: getPermalink('/'),
-    },
+    { text: 'Mission', href: '#mission' },
+    { text: 'Research', href: '#research' },
+    { text: 'Initiatives', href: '#initiatives' },
+    { text: 'Director', href: '#director' },
+    { text: 'Contact', href: '#contact' },
   ],
 };
 
-export const footerData = {
-  socialLinks: [
-    // { ariaLabel: 'LinkedIn', icon: 'tabler:brand-linkedin', href: '' },
-    { ariaLabel: 'Github', icon: 'tabler:brand-github', href: 'https://github.com/TATAR-LAB' },
-    // { ariaLabel: 'Huggingface', icon: 'hf-logo', href: '' },
-  ],
-};
+export const footerData = {};

@@ -1,224 +1,348 @@
 ---
 import Layout from '~/layouts/PageLayout.astro';
 import Hero from '~/components/widgets/Hero.astro';
-import Note from '~/components/widgets/Note.astro';
 import Features from '~/components/widgets/Features.astro';
-import Features2 from '~/components/widgets/Features2.astro';
 import Steps from '~/components/widgets/Steps.astro';
 import Content from '~/components/widgets/Content.astro';
 import Stats from '~/components/widgets/Stats.astro';
 import Image from '~/components/common/Image.astro';
+import { Icon } from 'astro-icon/components';
 
 const metadata = {
-  title: 'TATAR Lab',
+  title: 'TATAR Lab · AI Security, Cyber Risk and Critical Infrastructure',
   ignoreTitleTemplate: true,
 };
+
+// Shared card treatment: white panel, hairline border, navy icon chip, left aligned.
+const cardClasses = {
+  items: {
+    panel: 'flex-col h-full max-w-none rounded-xl border border-slate-200 bg-white p-6 shadow-sm',
+    icon: 'w-11 h-11 p-2.5 mb-4 mr-0 rtl:ml-0 rounded-lg bg-primary/5 text-primary ring-1 ring-primary/10',
+    title: 'text-lg md:text-lg font-bold leading-snug tracking-tight min-h-[3.25rem]',
+    description: 'mt-2 text-[0.95rem] leading-relaxed text-muted',
+  },
+};
+
+const initiatives = [
+  {
+    name: 'VICOR',
+    title: 'Virtual Institute of Cyber Operations and Research',
+    description:
+      'A Department of Defense funded cyber institute run with Florida International University. VICOR builds the operational skills of future cyber leaders through applied training, competitions, internships, and research placements. Dr. Tatar serves as principal investigator.',
+    icon: 'tabler:shield-lock',
+    href: 'https://cyberresearchgroup.org/',
+    label: 'cyberresearchgroup.org',
+  },
+  {
+    name: 'CATIS',
+    title: 'Cyber and Terrorism Insurance Studies',
+    description:
+      'A national, NSF supported center on catastrophic cyber and terrorism risk, anchored at the University at Albany with the University of Michigan. CATIS spans risk modeling, insurance and capital markets, security controls, systemic AI risk, and policy.',
+    icon: 'tabler:building-bank',
+    href: 'https://catis.org',
+    label: 'catis.org',
+  },
+];
 ---
 
 <Layout metadata={metadata}>
-  <!-- Logo ******************* -->
-  <div class="flex flex-col sm:flex-row items-center justify-center gap-x-4 gap-y-4 pt-5">
-    <Image
-      class="w-full"
-      widths={[400, 768, 1024, 2040]}
-      sizes="(max-width: 767px) 400px, (max-width: 1023px) 768px, (max-width: 2039px) 1024px, 2040px"
-      loading="eager"
-      width={350}
-      src="~/assets/images/cehc.png"
-      alt="Ualbany Logo"
-    />
-    <Image
-      class="w-full"
-      widths={[400, 768, 1024, 2040]}
-      sizes="(max-width: 767px) 400px, (max-width: 1023px) 768px, (max-width: 2039px) 1024px, 2040px"
-      loading="eager"
-      width={250}
-      src="~/assets/images/logo.png"
-      alt="Lab Logo"
-    />
-  </div>
-
-  <!-- Hero Widget ******************* -->
+  <!-- Hero ******************* -->
   <Hero>
-    <!-- image={{ src: '~/assets/images/lab2.jpeg', alt: 'Lab' }}> -->
-    <!-- Animated Gradient Title -->
     <Fragment slot="title">
-      <h1
-        class="text-5xl py-3 font-extrabold bg-gradient-to-r from-gray-100 via-blue-500 to-gray-900 bg-clip-text text-transparent"
-      >
-        TATAR LAB
-      </h1>
+      <span class="block text-slate-900">TATAR Lab</span>
+      <span class="mt-2 block text-2xl font-bold tracking-tight text-primary sm:text-3xl md:text-4xl">
+        Securing AI. Quantifying cyber risk.
+      </span>
     </Fragment>
 
-    <!-- Bold Subtitle -->
     <Fragment slot="subtitle">
-      <p class="text-xl py-5 font-bold text-white">
-        The TATAR Laboratory, led by Dr. Tatar, is at the forefront of advancing cybersecurity and AI risk and safety.
+      <p class="mx-auto max-w-2xl text-lg leading-relaxed text-muted sm:text-xl">
+        A research lab at the University at Albany, SUNY, working on the security and safety of AI systems, the
+        economics of cyber risk, and the protection of critical infrastructure.
       </p>
     </Fragment>
 
-    <!-- Bold Content -->
     <Fragment slot="content">
-      <p class="text-md py-5 font-bold text-gray-600">
-        University at Albany SUNY, ETEC Room 350P
-        <br />1220 Washington Avenue, Albany, NY 12226
-      </p>
+      <div class="mt-10 flex flex-col items-center gap-4 sm:flex-row sm:justify-center">
+        <a class="btn-primary w-full sm:w-auto" href="#research">Explore our research</a>
+        <a class="btn w-full sm:w-auto" href="#contact">Work with us</a>
+      </div>
+
+      <div class="mt-14 border-t border-slate-200 pt-10">
+        <p class="text-xs font-semibold uppercase tracking-[0.18em] text-muted">Part of</p>
+        <div class="mt-6 flex justify-center">
+          <a href="https://www.albany.edu/cehc" target="_blank" rel="noopener noreferrer">
+            <Image
+              class="h-32 w-auto sm:h-40 lg:h-44"
+              src="~/assets/images/cehc.png"
+              alt="College of Emergency Preparedness, Homeland Security and Cybersecurity, University at Albany, State University of New York"
+              width={560}
+              height={350}
+              loading="eager"
+            />
+          </a>
+        </div>
+      </div>
     </Fragment>
   </Hero>
 
-  <!-- Note Widget ******************* -->
-  <!-- <Note content="NOTE" /> -->
-
-  <Content
-    isReversed
-    tagline="Our"
-    title="Mission & Focus"
-    items={[
-      {
-        title: 'AI Security & Risk Models',
-        description:
-          'Analyzing and evaluating the risks of advanced AI models, alongside their implications for both defensive and offensive security.',
-      },
-      {
-        title: 'Cyber Economics & Insurance',
-        description:
-          'Investigating the economics of cybersecurity, including cyber risk quantification and the challenges of cyber insurance.',
-      },
-      {
-        title: 'Critical Infrastructure',
-        description:
-          'Developing models to capture and mitigate the cascading impacts of cyberattacks across interconnected systems and national security.',
-      },
-    ]}
-    image={{
-      src: '~/assets/images/img2.jpg',
-      alt: 'Colorful Image',
-    }}
-  >
-    <Fragment slot="content">
-      <h3 class="text-2xl font-bold tracking-tight dark:text-white sm:text-3xl mb-2">Advancing Security Through Research</h3>
-      We integrate perspectives from risk analysis, economics, engineering, and policy to solve complex cybersecurity challenges and build resilient digital environments.
-    </Fragment>
-
-    <Fragment slot="bg">
-      <div class="absolute inset-0 bg-blue-50 dark:bg-transparent"></div>
-    </Fragment>
-  </Content>
-
-  <Content
-    isAfterContent
-    tagline="Our"
-    title="Director"
-    items={[
-      {
-        title: 'Dr. Unal Tatar',
-        description: 'Dr. Unal Tatar is an Associate Professor in the Department of Cybersecurity at UAlbany. With over two decades of experience spanning government, academia, and international initiatives, his research bridges the technical, managerial, and policy aspects of cybersecurity.',
-        callToAction: {
-          target: '_blank',
-          text: 'Website',
-          href: 'https://www.albany.edu/cehc/faculty/unal-tatar',
-        },
-      },
-    ]}
-    image={{
-      src: '~/assets/images/tatar.jpg',
-      alt: 'Photo of Dr. Tatar',
-    }}
-  >
-    <!-- <Fragment slot="content">Ensure your online presence truly represents you.</Fragment> -->
-    <Fragment slot="bg">
-      <div class="absolute inset-0 bg-blue-50 dark:bg-transparent"></div>
-    </Fragment>
-  </Content>
-
-  <!-- Our Research Areas ******************* -->
-
+  <!-- Mission ******************* -->
   <Features
-    tagline="What We Do"
-    title="Research Focus Areas"
+    id="mission"
+    tagline="Our mission"
+    title="Advancing security through research"
+    subtitle="We combine risk analysis, economics, engineering, and policy to answer questions no single discipline can settle on its own."
+    columns={3}
+    classes={cardClasses}
     items={[
       {
-        title: 'AI Security & Validation',
+        title: 'Measure what is actually risky',
         description:
-          'Benchmarking and assessing the capabilities and vulnerabilities of state-of-the-art LLMs and AI systems in cybersecurity contexts.',
-        icon: 'tabler:brain',
+          'We build benchmarks, datasets, and evaluation frameworks that turn vague claims about AI and cyber risk into numbers that can be compared and audited.',
+        icon: 'tabler:ruler-measure',
       },
       {
-        title: 'Cyber Insurance & Risk',
+        title: 'Follow risk through systems',
         description:
-          'Quantifying cyber risks and studying the structure, challenges, and economics of the cyber insurance market.',
-        icon: 'tabler:shield-check',
+          'Risk rarely stays where it starts. We model how it propagates across model supply chains, insurance portfolios, and interconnected infrastructure.',
+        icon: 'tabler:affiliate',
       },
       {
-        title: 'Critical Infrastructure',
+        title: 'Translate research into decisions',
         description:
-          'Modeling risk propagation and cascading impacts of cyber incidents across essential systems and infrastructure.',
-        icon: 'tabler:building-factory',
+          'Our work is aimed at the people who act on it: security teams, insurers, regulators, and boards. We put findings in the language each of them uses.',
+        icon: 'tabler:target-arrow',
+      },
+    ]}
+  >
+    <Fragment slot="bg">
+      <div class="absolute inset-0 bg-slate-50 dark:bg-transparent"></div>
+    </Fragment>
+  </Features>
+
+  <!-- Research Focus Areas ******************* -->
+  <Features
+    id="research"
+    tagline="What we work on"
+    title="Research focus areas"
+    subtitle="Six threads run through the lab's current and past work. They overlap by design."
+    columns={3}
+    classes={cardClasses}
+    items={[
+      {
+        title: 'AI Security & Autonomous Agents',
+        description:
+          'We study what AI agents can actually do in offensive and defensive security, measuring how far they get on realistic tasks and what closes the gap between a cheap model and a frontier one.',
+        icon: 'tabler:robot',
+      },
+      {
+        title: 'LLM Risk, Safety & Evaluation',
+        description:
+          'We develop structured ways to score the security posture of language models, working from established taxonomies and tracing how risk in a base model propagates to everything derived from it.',
+        icon: 'tabler:shield-search',
+      },
+      {
+        title: 'Cyber Insurance & Risk Transfer',
+        description:
+          'Insurance is where cyber risk becomes a price. We study how that price is set, how catastrophic exposures behave, and where policies written before AI leave coverage ambiguous.',
+        icon: 'tabler:umbrella',
       },
       {
         title: 'Economics of Cybersecurity',
         description:
-          'Evaluating security investments, incentives, and the economic forces that shape organizational risk management.',
-        icon: 'tabler:chart-bar',
+          'Security budgets are set under uncertainty and the incentives rarely point where the risk is. We apply risk analysis, operations research, and economics to investment and prioritization.',
+        icon: 'tabler:chart-arrows',
       },
       {
-        title: 'Cybersecurity Decision Making',
+        title: 'Critical Infrastructure',
         description:
-          'Applying risk analysis, operations research, and policy analysis to improve strategic cyber defense planning.',
-        icon: 'tabler:bulb',
+          'Attacks on infrastructure do not stop at the system they hit. We model how disruptions cascade through interconnected sectors, including healthcare, industrial control, space, and maritime.',
+        icon: 'tabler:building-broadcast-tower',
       },
       {
-        title: 'Capacity Building',
+        title: 'AI Incidents & Governance',
         description:
-          'Developing innovative curricula, cyber exercises, and workforce programs to train the next generation of cyber professionals.',
-        icon: 'tabler:school',
+          'Understanding how AI systems fail in the world requires a reliable record of those failures. We work on collecting that record and on evaluating the tooling meant to govern it.',
+        icon: 'tabler:alert-triangle',
       },
     ]}
   />
 
-  <!-- Real-World Impact ******************* -->
+  <!-- Flagship Initiatives ******************* -->
+  <section id="initiatives" class="not-prose relative scroll-mt-[72px]">
+    <div class="absolute inset-0 -z-[1] bg-slate-50 dark:bg-transparent" aria-hidden="true"></div>
+    <div class="relative mx-auto max-w-5xl px-4 py-12 text-default md:px-6 md:py-16 lg:py-20">
+      <div class="mb-8 text-center md:mx-auto md:mb-12 md:max-w-3xl">
+        <p class="text-base font-bold uppercase tracking-wide text-secondary">At scale</p>
+        <h2 class="font-heading text-3xl font-bold leading-tight tracking-tighter md:text-4xl">Flagship initiatives</h2>
+        <p class="mt-4 text-xl text-muted">
+          Beyond individual projects, the lab helps lead two multi institution centers.
+        </p>
+      </div>
 
+      <div class="grid gap-8 sm:grid-cols-2">
+        {
+          initiatives.map((item) => (
+            <div class="flex h-full flex-col rounded-xl border border-slate-200 bg-white p-7 shadow-sm">
+              <Icon
+                name={item.icon}
+                class="mb-4 h-11 w-11 rounded-lg bg-primary/5 p-2.5 text-primary ring-1 ring-primary/10"
+              />
+              <p class="text-xs font-bold uppercase tracking-[0.16em] text-secondary">{item.name}</p>
+              <h3 class="mt-1 min-h-[3.5rem] text-xl font-bold leading-snug tracking-tight">{item.title}</h3>
+              <p class="mt-3 text-[0.95rem] leading-relaxed text-muted">{item.description}</p>
+              <div class="mt-auto flex flex-wrap items-center gap-x-4 gap-y-2 pt-6">
+                <a class="btn-primary px-5 py-2.5 text-sm" href={item.href} target="_blank" rel="noopener noreferrer">
+                  Read more
+                </a>
+                <span class="text-sm text-muted">{item.label}</span>
+              </div>
+            </div>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <!-- Impact ******************* -->
   <Steps
-    title="Driving Real-World Impact"
-    image={{
-      src: '~/assets/images/img1.jpeg',
-      alt: 'Steps image',
-    }}
+    tagline="Where the work lands"
+    title="Research with a constituency"
     items={[
       {
-        title: 'Government & Defense Collaboration',
-        description: 'Partnering with federal agencies, the DoD, and international organizations to address complex cybersecurity threats and design national-level cyber exercises.',
-        icon: 'tabler:shield-lock',
+        title: 'Government & defense',
+        description:
+          'Work supported by and conducted with NSF, the Department of Defense, the Air Force Research Laboratory, the Office of Naval Research, NSA, NIST, and NATO.',
+        icon: 'tabler:building-castle',
       },
       {
-        title: 'Industry & Insurance Partnerships',
+        title: 'Industry & insurance',
         description:
-          'Collaborating with insurance industry leaders and organizations to develop robust models for cyber risk quantification and liability assessment.',
-        icon: 'tabler:building-bank',
+          'Collaboration with insurers, actuarial bodies, and risk practitioners on cyber risk quantification, third party risk, and the coverage questions raised by AI.',
+        icon: 'tabler:briefcase',
       },
       {
-        title: 'Education & Workforce',
+        title: 'Students & workforce',
         description:
-          'Transforming cybersecurity education at the university level and fostering a pipeline of talented students equipped to tackle modern threats.',
+          'Curricula, cyber exercises, competitions, and funded research placements that move students into real operational problems and into the cybersecurity workforce.',
         icon: 'tabler:users',
       },
+      {
+        title: 'Open research output',
+        description:
+          'Benchmarks, datasets, evaluation harnesses, and agent tooling released publicly so results can be reproduced, contested, and built on.',
+        icon: 'tabler:brand-github',
+      },
     ]}
   />
 
-  <!-- Lab Stats ******************* -->
-
+  <!-- Stats ******************* -->
   <Stats
-    title="Lab Stats"
+    title="By the numbers"
     stats={[
-      { title: 'Papers Published', amount: '40+' },
-      { title: 'Grant Funding', amount: '$4M+' },
-      { title: 'Graduate Students', amount: '8' },
-      { title: 'Undergraduate Students', amount: '5+' },
+      { title: 'Peer-reviewed publications', amount: '40+', icon: 'tabler:file-text' },
+      { title: 'In grants & contracts', amount: '$4M+', icon: 'tabler:coin' },
+      { title: 'Citations', amount: '1,000+', icon: 'tabler:quote' },
     ]}
-  />
+  >
+    <Fragment slot="bg">
+      <div class="absolute inset-0 bg-slate-50 dark:bg-transparent"></div>
+    </Fragment>
+  </Stats>
 
-  <!-- Background styling if needed -->
-  <Fragment slot="bg">
-    <div class="absolute inset-0 bg-blue-50 dark:bg-transparent"></div>
-  </Fragment>
+  <!-- Director ******************* -->
+  <Content
+    id="director"
+    isReversed
+    tagline="Who leads it"
+    title="Director"
+    image={{
+      src: '~/assets/images/tatar.jpg',
+      alt: 'Portrait of Dr. Unal Tatar',
+    }}
+  >
+    <Fragment slot="content">
+      <h3 class="mb-3 text-2xl font-bold tracking-tight dark:text-white sm:text-3xl">Dr. Unal Tatar</h3>
+      <p class="text-lg leading-relaxed text-muted">
+        Associate Professor in the Department of Cybersecurity at the University at Albany&rsquo;s College of Emergency
+        Preparedness, Homeland Security and Cybersecurity. Before joining UAlbany he led Turkey&rsquo;s national
+        Computer Emergency Response Team and advised NATO&rsquo;s Centre of Excellence for Defence Against Terrorism. He
+        is principal investigator of the DoD funded VICOR institute and directs the NSF supported CATIS center, with a
+        portfolio exceeding $4 million in grants and contracts, and has published two edited volumes and more than 40
+        peer reviewed papers in venues including <em>Risk Analysis</em> and <em>Computers &amp; Security</em>.
+      </p>
+      <div class="mt-6 flex flex-wrap gap-x-6 gap-y-2 text-sm font-semibold text-primary">
+        <a
+          class="hover:underline"
+          href="https://www.albany.edu/cehc/faculty/unal-tatar"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          Faculty profile
+        </a>
+        <a
+          class="hover:underline"
+          href="https://scholar.google.com/citations?user=3agv4kcAAAAJ&hl=en"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          Google Scholar
+        </a>
+      </div>
+    </Fragment>
+  </Content>
+
+  <!-- Contact ******************* -->
+  <section id="contact" class="not-prose relative scroll-mt-[72px]">
+    <div class="absolute inset-0 -z-[1] bg-slate-50 dark:bg-transparent" aria-hidden="true"></div>
+    <div class="relative mx-auto max-w-5xl px-6 py-12 text-default md:px-8 md:py-16 lg:py-20">
+      <div class="grid items-center gap-10 md:grid-cols-2 md:gap-14">
+        <div>
+          <p class="text-base font-bold uppercase tracking-wide text-secondary">Contact</p>
+          <h2 class="mt-2 font-heading text-3xl font-bold leading-tight tracking-tighter md:text-4xl">
+            Work with the lab
+          </h2>
+          <p class="mt-4 text-lg text-muted">
+            We are glad to hear from prospective graduate and undergraduate students, and from collaborators in
+            government, industry, and insurance. A short note about what you are working on is the best place to start.
+          </p>
+          <a class="btn-primary mt-8 inline-flex" href="mailto:utatar@albany.edu">Get in touch</a>
+        </div>
+
+        <div class="rounded-xl border border-slate-200 bg-white p-7 shadow-sm">
+          <dl class="space-y-6">
+            <div>
+              <dt class="text-xs font-semibold uppercase tracking-[0.14em] text-muted">Email</dt>
+              <dd class="mt-1 text-lg">
+                <a class="font-semibold text-primary hover:underline" href="mailto:utatar@albany.edu">
+                  utatar@albany.edu
+                </a>
+              </dd>
+            </div>
+            <div>
+              <dt class="text-xs font-semibold uppercase tracking-[0.14em] text-muted">Visit</dt>
+              <dd class="mt-1 text-base leading-relaxed">
+                ETEC Building, Room 350P<br />
+                1220 Washington Avenue<br />
+                Albany, NY 12222
+              </dd>
+            </div>
+            <div>
+              <dt class="text-xs font-semibold uppercase tracking-[0.14em] text-muted">Code &amp; data</dt>
+              <dd class="mt-1 text-base">
+                <a
+                  class="font-semibold text-primary hover:underline"
+                  href="https://github.com/TATAR-LAB"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  github.com/TATAR-LAB
+                </a>
+              </dd>
+            </div>
+          </dl>
+        </div>
+      </div>
+    </div>
+  </section>
 </Layout>
