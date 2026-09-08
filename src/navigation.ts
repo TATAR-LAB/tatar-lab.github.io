@@ -3,7 +3,7 @@ export const headerData = {
     { text: 'Mission', href: '#mission' },
     { text: 'Research', href: '#research' },
     { text: 'Initiatives', href: '#initiatives' },
-    { text: 'Director', href: '#director' },
+    { text: 'Team', href: '#team' },
     { text: 'Contact', href: '#contact' },
   ],
 };

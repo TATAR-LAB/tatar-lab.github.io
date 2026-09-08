@@ -3,10 +3,11 @@ import Layout from '~/layouts/PageLayout.astro';
 import Hero from '~/components/widgets/Hero.astro';
 import Features from '~/components/widgets/Features.astro';
 import Steps from '~/components/widgets/Steps.astro';
-import Content from '~/components/widgets/Content.astro';
+
 import Stats from '~/components/widgets/Stats.astro';
 import Image from '~/components/common/Image.astro';
-import { Icon } from 'astro-icon/components';
+import viceroyLogo from '~/assets/images/viceroy-logo.webp';
+import catisLogo from '~/assets/images/catis-logo.webp';
 
 const metadata = {
   title: 'TATAR Lab · AI Security, Cyber Risk and Critical Infrastructure',
@@ -29,8 +30,8 @@ const initiatives = [
     name: 'VICOR',
     title: 'Virtual Institute of Cyber Operations and Research',
     description:
-      'A Department of Defense funded cyber institute run with Florida International University. VICOR builds the operational skills of future cyber leaders through applied training, competitions, internships, and research placements. Dr. Tatar serves as principal investigator.',
-    icon: 'tabler:shield-lock',
+      'A Department of Defense funded cyber institute run with Florida International University. VICOR builds the operational skills of future cyber leaders through applied training, competitions, internships, and research placements.',
+    image: viceroyLogo.src,
     href: 'https://cyberresearchgroup.org/',
     label: 'cyberresearchgroup.org',
   },
@@ -39,7 +40,7 @@ const initiatives = [
     title: 'Cyber and Terrorism Insurance Studies',
     description:
       'A national, NSF supported center on catastrophic cyber and terrorism risk, anchored at the University at Albany with the University of Michigan. CATIS spans risk modeling, insurance and capital markets, security controls, systemic AI risk, and policy.',
-    icon: 'tabler:building-bank',
+    image: catisLogo.src,
     href: 'https://catis.org',
     label: 'catis.org',
   },
@@ -52,7 +53,7 @@ const initiatives = [
     <Fragment slot="title">
       <span class="block text-slate-900">TATAR Lab</span>
       <span class="mt-2 block text-2xl font-bold tracking-tight text-primary sm:text-3xl md:text-4xl">
-        Securing AI. Quantifying cyber risk.
+        Securing AI. Quantifying Cyber Risk.
       </span>
     </Fragment>
 
@@ -69,7 +70,7 @@ const initiatives = [
         <a class="btn w-full sm:w-auto" href="#contact">Work with us</a>
       </div>
 
-      <div class="mt-14 border-t border-slate-200 pt-10">
+      <!-- <div class="mt-14 border-t border-slate-200 pt-10">
         <p class="text-xs font-semibold uppercase tracking-[0.18em] text-muted">Part of</p>
         <div class="mt-6 flex justify-center">
           <a href="https://www.albany.edu/cehc" target="_blank" rel="noopener noreferrer">
@@ -83,7 +84,7 @@ const initiatives = [
             />
           </a>
         </div>
-      </div>
+      </div> -->
     </Fragment>
   </Hero>
 
@@ -145,13 +146,13 @@ const initiatives = [
       {
         title: 'Cyber Insurance & Risk Transfer',
         description:
-          'Insurance is where cyber risk becomes a price. We study how that price is set, how catastrophic exposures behave, and where policies written before AI leave coverage ambiguous.',
+          'We study how to price cyber risk, how catastrophic exposures behave, and where policies written before AI leave coverage ambiguous.',
         icon: 'tabler:umbrella',
       },
       {
         title: 'Economics of Cybersecurity',
         description:
-          'Security budgets are set under uncertainty and the incentives rarely point where the risk is. We apply risk analysis, operations research, and economics to investment and prioritization.',
+          'Security budgets are set under uncertainty and the incentives rarely point where the risk is. We apply risk analysis, operations research, and economics to investment and risk mitigation prioritization.',
         icon: 'tabler:chart-arrows',
       },
       {
@@ -175,7 +176,7 @@ const initiatives = [
     <div class="relative mx-auto max-w-5xl px-4 py-12 text-default md:px-6 md:py-16 lg:py-20">
       <div class="mb-8 text-center md:mx-auto md:mb-12 md:max-w-3xl">
         <p class="text-base font-bold uppercase tracking-wide text-secondary">At scale</p>
-        <h2 class="font-heading text-3xl font-bold leading-tight tracking-tighter md:text-4xl">Flagship initiatives</h2>
+        <h2 class="font-heading text-3xl font-bold leading-tight tracking-tighter md:text-4xl">Multi-institutional Initiatives</h2>
         <p class="mt-4 text-xl text-muted">
           Beyond individual projects, the lab helps lead two multi institution centers.
         </p>
@@ -185,10 +186,14 @@ const initiatives = [
         {
           initiatives.map((item) => (
             <div class="flex h-full flex-col rounded-xl border border-slate-200 bg-white p-7 text-center shadow-sm sm:text-left">
-              <Icon
-                name={item.icon}
-                class="mx-auto mb-4 h-11 w-11 rounded-lg bg-primary/5 p-2.5 text-primary ring-1 ring-primary/10 sm:mx-0"
-              />
+              <div class="mx-auto mb-4 p-4">
+                <img
+                  class="mx-auto h-auto max-h-14 w-auto object-contain"
+                  src={item.image}
+                  alt={`${item.name} logo`}
+                  loading="lazy"
+                />
+              </div>
               <p class="text-xs font-bold uppercase tracking-[0.16em] text-secondary">{item.name}</p>
               <h3 class="mt-1 text-xl sm:min-h-[3.5rem] font-bold leading-snug tracking-tight">{item.title}</h3>
               <p class="mt-3 text-[0.95rem] leading-relaxed text-muted">{item.description}</p>
@@ -238,7 +243,7 @@ const initiatives = [
   />
 
   <!-- Stats ******************* -->
-  <Stats
+  <!-- <Stats
     title="By the numbers"
     stats={[
       { title: 'Peer-reviewed publications', amount: '40+', icon: 'tabler:file-text' },
@@ -249,49 +254,99 @@ const initiatives = [
     <Fragment slot="bg">
       <div class="absolute inset-0 bg-slate-50 dark:bg-transparent"></div>
     </Fragment>
-  </Stats>
+  </Stats> -->
 
-  <!-- Director ******************* -->
-  <Content
-    id="director"
-    isReversed
-    tagline="Who leads it"
-    title="Director"
-    image={{
-      src: '~/assets/images/tatar.jpg',
-      alt: 'Portrait of Dr. Unal Tatar',
-    }}
-  >
-    <Fragment slot="content">
-      <h3 class="mb-3 text-2xl font-bold tracking-tight dark:text-white sm:text-3xl">Dr. Unal Tatar</h3>
-      <p class="text-lg leading-relaxed text-muted">
-        Associate Professor in the Department of Cybersecurity at the University at Albany&rsquo;s College of Emergency
-        Preparedness, Homeland Security and Cybersecurity. Before joining UAlbany he led Turkey&rsquo;s national
-        Computer Emergency Response Team and advised NATO&rsquo;s Centre of Excellence for Defence Against Terrorism. He
-        is principal investigator of the DoD funded VICOR institute and directs the NSF supported CATIS center, with a
-        portfolio exceeding $4 million in grants and contracts, and has published two edited volumes and more than 40
-        peer reviewed papers in venues including <em>Risk Analysis</em> and <em>Computers &amp; Security</em>.
-      </p>
-      <div class="mt-4 flex flex-wrap gap-x-6 text-sm font-semibold text-primary">
-        <a
-          class="inline-block py-2.5 hover:underline"
-          href="https://www.albany.edu/cehc/faculty/unal-tatar"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Faculty profile
-        </a>
-        <a
-          class="inline-block py-2.5 hover:underline"
-          href="https://scholar.google.com/citations?user=3agv4kcAAAAJ&hl=en"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Google Scholar
-        </a>
+  <!-- Team ******************* -->
+  <section id="team" class="not-prose relative scroll-mt-[72px]">
+    <div class="absolute inset-0 -z-[1] bg-slate-50 dark:bg-transparent" aria-hidden="true"></div>
+    <div class="relative mx-auto max-w-5xl px-4 py-12 text-default md:px-6 md:py-16 lg:py-20">
+      <div class="mb-8 text-center md:mx-auto md:mb-12 md:max-w-3xl">
+        <p class="text-base font-bold uppercase tracking-wide text-secondary">Who leads it</p>
+        <h2 class="font-heading text-3xl font-bold leading-tight tracking-tighter md:text-4xl">Team</h2>
       </div>
-    </Fragment>
-  </Content>
+
+      <!-- Director -->
+      <div class="mb-16 flex flex-col gap-8 md:flex-row md:items-center md:gap-16">
+        <div class="md:basis-1/2">
+          <div class="relative m-auto max-w-md">
+            <Image
+              class="mx-auto w-full rounded-lg bg-gray-500 shadow-lg"
+              src="~/assets/images/tatar.jpg"
+              alt="Portrait of Dr. Unal Tatar"
+              width={500}
+              height={500}
+              widths={[800, 1200]}
+              sizes="(max-width: 768px) 100vw, 432px"
+              layout="responsive"
+              loading="lazy"
+            />
+          </div>
+        </div>
+        <div class="md:basis-1/2">
+          <h3 class="mb-3 text-2xl font-bold tracking-tight dark:text-white sm:text-3xl">Dr. Unal Tatar</h3>
+          <p class="text-lg leading-relaxed text-muted">
+            Associate Professor in the Department of Cybersecurity at the University at Albany&rsquo;s College of Emergency
+            Preparedness, Homeland Security and Cybersecurity. Before joining UAlbany he led Turkey&rsquo;s national
+            Computer Emergency Response Team and advised NATO&rsquo;s Centre of Excellence for Defence Against Terrorism. He
+            is the lead principal investigator of the DoD funded VICOR institute and directs the NSF supported CATIS center, 
+            with grants and contracts, and has published two edited volumes and peer reviewed papers in venues including 
+            <em>Risk Analysis</em> and <em>Computers &amp; Security</em>.
+          </p>
+          <div class="mt-4 flex flex-wrap gap-x-6 text-sm font-semibold text-primary">
+            <a
+              class="inline-block py-2.5 hover:underline"
+              href="https://www.albany.edu/cehc/faculty/unal-tatar"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              Faculty profile
+            </a>
+            <a
+              class="inline-block py-2.5 hover:underline"
+              href="https://scholar.google.com/citations?user=3agv4kcAAAAJ&hl=en"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              Google Scholar
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Team Members -->
+      <div class="grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
+        <!-- Graduate Students -->
+        <div class="rounded-xl border border-slate-200 bg-white p-6 shadow-sm">
+          <h4 class="mb-4 text-sm font-bold uppercase tracking-wide text-secondary">Graduate Students</h4>
+          <ul class="space-y-3">
+            <li class="text-lg font-semibold text-default">Hakan T. Otal</li>
+            <li class="text-lg font-semibold text-default">Brianna L. Bace</li>
+            <li class="text-lg font-semibold text-default">Divij Jain</li>
+          </ul>
+        </div>
+
+        <!-- Undergraduate Students -->
+        <div class="rounded-xl border border-slate-200 bg-white p-6 shadow-sm">
+          <h4 class="mb-4 text-sm font-bold uppercase tracking-wide text-secondary">Undergraduate Students</h4>
+          <ul class="space-y-3">
+            <li class="text-lg font-semibold text-default">Shayaan Khaliq</li>
+            <li class="text-lg font-semibold text-default">Tyler H. Merves</li>
+            <li class="text-lg font-semibold text-default">Joseph M. Escobar</li>
+            <li class="text-lg font-semibold text-default">Michael H. Conaway</li>
+          </ul>
+        </div>
+
+        <!-- Non-Resident Researchers -->
+        <div class="rounded-xl border border-slate-200 bg-white p-6 shadow-sm">
+          <h4 class="mb-4 text-sm font-bold uppercase tracking-wide text-secondary">Non-Resident Researchers</h4>
+          <ul class="space-y-3">
+            <li class="text-lg font-semibold text-default">C. Cagri Akgunduz</li>
+            <li class="text-lg font-semibold text-default">Thora Knight</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
 
   <!-- Contact ******************* -->
   <section id="contact" class="not-prose relative scroll-mt-[72px]">
