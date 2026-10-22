@@ -8,6 +8,16 @@ import Stats from '~/components/widgets/Stats.astro';
 import Image from '~/components/common/Image.astro';
 import viceroyLogo from '~/assets/images/viceroy-logo.webp';
 import catisLogo from '~/assets/images/catis-logo.webp';
+import nsfLogo from '~/assets/images/sponsors/nsf.webp';
+import dodLogo from '~/assets/images/sponsors/dod.webp';
+import afrlLogo from '~/assets/images/sponsors/afrl.webp';
+import onrLogo from '~/assets/images/sponsors/onr.webp';
+import nistLogo from '~/assets/images/sponsors/nist.webp';
+import nsaLogo from '~/assets/images/sponsors/nsa.webp';
+import natoLogo from '~/assets/images/sponsors/nato.webp';
+import griffissLogo from '~/assets/images/sponsors/griffiss.webp';
+import gfceLogo from '~/assets/images/sponsors/gfce.webp';
+import soaLogo from '~/assets/images/sponsors/soa.webp';
 
 const metadata = {
   title: 'TATAR Lab · AI Security, Cyber Risk and Critical Infrastructure',
@@ -39,11 +49,24 @@ const initiatives = [
     name: 'CATIS',
     title: 'Cyber and Terrorism Insurance Studies',
     description:
-      'A national, NSF supported center on catastrophic cyber and terrorism risk, anchored at the University at Albany with the University of Michigan. CATIS spans risk modeling, insurance and capital markets, security controls, systemic AI risk, and policy.',
+      'A cyber and terrorism insurance research center in its NSF funded planning phase, jointly led by the University at Albany and the University of Michigan. The planning grant, from the NSF Industry-University Cooperative Research Centers program, funds the work of bringing academic and industry partners together around catastrophic cyber and terrorism risk, insurance, and emerging technologies.',
     image: catisLogo.src,
     href: 'https://catis.org',
     label: 'catis.org',
   },
+];
+
+const sponsors = [
+  { name: 'National Science Foundation', image: nsfLogo.src },
+  { name: 'Department of Defense', image: dodLogo.src },
+  { name: 'Air Force Research Laboratory', image: afrlLogo.src },
+  { name: 'Office of Naval Research', image: onrLogo.src },
+  { name: 'National Institute of Standards and Technology', image: nistLogo.src },
+  { name: 'National Security Agency', image: nsaLogo.src },
+  { name: 'NATO Science for Peace and Security Programme', image: natoLogo.src },
+  { name: 'Griffiss Institute', image: griffissLogo.src },
+  { name: 'Global Forum on Cyber Expertise', image: gfceLogo.src },
+  { name: 'Society of Actuaries', image: soaLogo.src },
 ];
 ---
 
@@ -53,14 +76,14 @@ const initiatives = [
     <Fragment slot="title">
       <span class="block text-slate-900">TATAR Lab</span>
       <span class="mt-2 block text-2xl font-bold tracking-tight text-primary sm:text-3xl md:text-4xl">
-        Securing AI. Quantifying Cyber Risk.
+        Quantifying cyber risk and securing AI
       </span>
     </Fragment>
 
     <Fragment slot="subtitle">
       <p class="mx-auto max-w-2xl text-lg leading-relaxed text-muted sm:text-xl">
-        A research lab at the University at Albany, SUNY, working on the security and safety of AI systems, the
-        economics of cyber risk, and the protection of critical infrastructure.
+        A research lab at the University at Albany, SUNY, working on the security and safety of AI systems, cyber
+        risk and insurance, and the protection of critical infrastructure.
       </p>
     </Fragment>
 
@@ -92,19 +115,19 @@ const initiatives = [
   <Features
     id="mission"
     tagline="Our mission"
-    title="Advancing security through research"
+    title="Making cyber and AI risk measurable and manageable"
     subtitle="We combine risk analysis, economics, engineering, and policy to answer questions no single discipline can settle on its own."
-    columns={3}
+    columns={2}
     classes={cardClasses}
     items={[
       {
-        title: 'Measure what is actually risky',
+        title: 'Quantify risk with evidence',
         description:
-          'We build benchmarks, datasets, and evaluation frameworks that turn vague claims about AI and cyber risk into numbers that can be compared and audited.',
+          'We build benchmarks, datasets, and evaluation frameworks that turn qualitative judgments about AI and cyber risk into measurements that can be compared and audited.',
         icon: 'tabler:ruler-measure',
       },
       {
-        title: 'Follow risk through systems',
+        title: 'Model systemic and cascading risk',
         description:
           'Risk rarely stays where it starts. We model how it propagates across model supply chains, insurance portfolios, and interconnected infrastructure.',
         icon: 'tabler:affiliate',
@@ -114,6 +137,12 @@ const initiatives = [
         description:
           'Our work is aimed at the people who act on it: security teams, insurers, regulators, and boards. We put findings in the language each of them uses.',
         icon: 'tabler:target-arrow',
+      },
+      {
+        title: 'Develop the cybersecurity workforce',
+        description:
+          'Managing these risks takes skilled people. Through VICOR and lab research, students gain hands-on experience in cyber operations, AI security, and risk analysis that prepares them for careers in the field.',
+        icon: 'tabler:school',
       },
     ]}
   >
@@ -132,21 +161,21 @@ const initiatives = [
     classes={cardClasses}
     items={[
       {
-        title: 'AI Security & Autonomous Agents',
+        title: 'Frontier AI & Agentic Security',
         description:
-          'We study what AI agents can actually do in offensive and defensive security, measuring how far they get on realistic tasks and what closes the gap between a cheap model and a frontier one.',
+          'AI agents are starting to do real offensive and defensive security work. Red teaming frontier models and agents on realistic tasks shows how far they get and what closes the gap between a cheap model and a frontier one.',
         icon: 'tabler:robot',
       },
       {
         title: 'LLM Risk, Safety & Evaluation',
         description:
-          'We develop structured ways to score the security posture of language models, working from established taxonomies and tracing how risk in a base model propagates to everything derived from it.',
+          'Language models are hard to compare on security without a common yardstick. Adversarial evaluations and scoring built on established taxonomies provide that yardstick and trace how risk in a base model carries into everything derived from it.',
         icon: 'tabler:shield-search',
       },
       {
-        title: 'Cyber Insurance & Risk Transfer',
+        title: 'Cyber & AI Insurance',
         description:
-          'We study how to price cyber risk, how catastrophic exposures behave, and where policies written before AI leave coverage ambiguous.',
+          'Cyber risk is still hard to price. This work examines how catastrophic and systemic exposures behave and where policies written before AI leave coverage ambiguous.',
         icon: 'tabler:umbrella',
       },
       {
@@ -158,17 +187,48 @@ const initiatives = [
       {
         title: 'Critical Infrastructure',
         description:
-          'Attacks on infrastructure do not stop at the system they hit. We model how disruptions cascade through interconnected sectors, including healthcare, industrial control, space, and maritime.',
+          'Attacks on infrastructure do not stop at the system they hit. We model how disruptions cascade across healthcare, space, maritime, and other interconnected sectors, and study the new risks AI brings to industrial control systems.',
         icon: 'tabler:building-broadcast-tower',
       },
       {
-        title: 'AI Incidents & Governance',
+        title: 'AI Governance, Oversight & Policy',
         description:
-          'Understanding how AI systems fail in the world requires a reliable record of those failures. We work on collecting that record and on evaluating the tooling meant to govern it.',
+          'Governing AI starts with a reliable record of how it fails in the world. We build that record, evaluate the tooling meant to govern AI, study how people keep effective oversight of autonomous systems, and work on the policy and national security questions that follow.',
         icon: 'tabler:alert-triangle',
       },
     ]}
   />
+
+  <!-- Research Sponsors ******************* -->
+  <section id="sponsors" class="not-prose relative scroll-mt-[72px]">
+    <div class="relative mx-auto max-w-5xl px-4 pb-12 text-default md:px-6 md:pb-16 lg:pb-20">
+      <div class="border-t border-slate-200 pt-12 md:pt-16">
+        <div class="mb-8 text-center md:mx-auto md:mb-12 md:max-w-3xl">
+          <p class="text-base font-bold uppercase tracking-wide text-secondary">Research sponsors</p>
+          <h2 class="font-heading text-3xl font-bold leading-tight tracking-tighter md:text-4xl">Supported by</h2>
+          <p class="mt-4 text-xl text-muted">Our research has been supported by these agencies and organizations.</p>
+        </div>
+
+        <div class="grid grid-cols-2 gap-x-6 gap-y-10 md:grid-cols-5">
+          {
+            sponsors.map((sponsor) => (
+              <div class="flex flex-col items-center text-center">
+                <div class="flex h-16 w-full items-center justify-center">
+                  <img
+                    class="max-h-16 max-w-full object-contain sm:max-w-[10rem]"
+                    src={sponsor.image}
+                    alt={`${sponsor.name} logo`}
+                    loading="lazy"
+                  />
+                </div>
+                <p class="mt-3 text-sm font-medium text-muted">{sponsor.name}</p>
+              </div>
+            ))
+          }
+        </div>
+      </div>
+    </div>
+  </section>
 
   <!-- Flagship Initiatives ******************* -->
   <section id="initiatives" class="not-prose relative scroll-mt-[72px]">
@@ -178,7 +238,8 @@ const initiatives = [
         <p class="text-base font-bold uppercase tracking-wide text-secondary">At scale</p>
         <h2 class="font-heading text-3xl font-bold leading-tight tracking-tighter md:text-4xl">Multi-institutional Initiatives</h2>
         <p class="mt-4 text-xl text-muted">
-          Beyond individual projects, the lab helps lead two multi institution centers.
+          Beyond individual projects, the lab leads larger efforts that bring together universities, government, and
+          industry.
         </p>
       </div>
 
@@ -224,7 +285,7 @@ const initiatives = [
       {
         title: 'Industry & insurance',
         description:
-          'Collaboration with insurers, actuarial bodies, and risk practitioners on cyber risk quantification, third party risk, and the coverage questions raised by AI.',
+          'Society of Actuaries research projects and an NAIC research fellowship, alongside work with insurers and risk practitioners on cyber risk quantification, third party risk, and the coverage questions raised by AI.',
         icon: 'tabler:briefcase',
       },
       {
@@ -247,7 +308,7 @@ const initiatives = [
     title="By the numbers"
     stats={[
       { title: 'Peer-reviewed publications', amount: '40+', icon: 'tabler:file-text' },
-      { title: 'In grants & contracts', amount: '$4M+', icon: 'tabler:coin' },
+      { title: 'In grants & contracts', amount: '$5M+', icon: 'tabler:coin' },
       { title: 'Citations', amount: '1,000+', icon: 'tabler:quote' },
     ]}
   >
@@ -261,36 +322,37 @@ const initiatives = [
     <div class="absolute inset-0 -z-[1] bg-slate-50 dark:bg-transparent" aria-hidden="true"></div>
     <div class="relative mx-auto max-w-5xl px-4 py-12 text-default md:px-6 md:py-16 lg:py-20">
       <div class="mb-8 text-center md:mx-auto md:mb-12 md:max-w-3xl">
-        <p class="text-base font-bold uppercase tracking-wide text-secondary">Who leads it</p>
+        <p class="text-base font-bold uppercase tracking-wide text-secondary">Who we are</p>
         <h2 class="font-heading text-3xl font-bold leading-tight tracking-tighter md:text-4xl">Team</h2>
       </div>
 
       <!-- Director -->
-      <div class="mb-16 flex flex-col gap-8 md:flex-row md:items-center md:gap-16">
-        <div class="md:basis-1/2">
-          <div class="relative m-auto max-w-md">
-            <Image
-              class="mx-auto w-full rounded-lg bg-gray-500 shadow-lg"
-              src="~/assets/images/tatar.jpg"
-              alt="Portrait of Dr. Unal Tatar"
-              width={500}
-              height={500}
-              widths={[800, 1200]}
-              sizes="(max-width: 768px) 100vw, 432px"
-              layout="responsive"
-              loading="lazy"
-            />
-          </div>
-        </div>
-        <div class="md:basis-1/2">
-          <h3 class="mb-3 text-2xl font-bold tracking-tight dark:text-white sm:text-3xl">Dr. Unal Tatar</h3>
-          <p class="text-lg leading-relaxed text-muted">
-            Associate Professor in the Department of Cybersecurity at the University at Albany&rsquo;s College of Emergency
-            Preparedness, Homeland Security and Cybersecurity. Before joining UAlbany he led Turkey&rsquo;s national
-            Computer Emergency Response Team and advised NATO&rsquo;s Centre of Excellence for Defence Against Terrorism. He
-            is the lead principal investigator of the DoD funded VICOR institute and directs the NSF supported CATIS center, 
-            with grants and contracts, and has published two edited volumes and peer reviewed papers in venues including 
-            <em>Risk Analysis</em> and <em>Computers &amp; Security</em>.
+      <div
+        class="mb-8 flex flex-col items-center gap-6 rounded-xl border border-slate-200 bg-white p-6 text-center shadow-sm sm:flex-row sm:items-start sm:gap-8 sm:p-8 sm:text-left"
+      >
+        <Image
+          class="h-36 w-36 shrink-0 rounded-full object-cover"
+          src="~/assets/images/tatar.jpg"
+          alt="Portrait of Dr. Unal Tatar"
+          width={144}
+          height={144}
+          layout="fixed"
+          loading="lazy"
+        />
+        <div>
+          <p class="text-sm font-bold uppercase tracking-wide text-secondary">Director</p>
+          <h3 class="mb-3 mt-1 text-2xl font-bold tracking-tight dark:text-white">Dr. Unal Tatar</h3>
+          <p class="text-base leading-relaxed text-muted">
+            Associate Professor in the Department of Cybersecurity at the University at Albany, working at the intersection
+            of cybersecurity, AI, risk analysis, and insurance. He is the lead principal investigator of the DoD funded
+            VICOR institute, leads the NSF funded planning phase of the
+            <a class="font-semibold text-primary hover:underline" href="https://catis.org" target="_blank" rel="noopener noreferrer">CATIS Center</a>
+            for cyber and terrorism insurance research, and is a co-principal investigator of
+            <a class="font-semibold text-primary hover:underline" href="https://www.albany.edu/cehc/crest" target="_blank" rel="noopener noreferrer">CREST</a>,
+            UAlbany&rsquo;s NIST funded Cybersecurity Incident Response Studio.
+            He has secured over $5 million in grants and contracts in cybersecurity and AI and was named a Research Fellow by
+            the National Association of Insurance Commissioners. Before joining academia he headed Turkey&rsquo;s national
+            CERT and advised NATO&rsquo;s Centre of Excellence for Defence Against Terrorism.
           </p>
           <div class="mt-4 flex flex-wrap gap-x-6 text-sm font-semibold text-primary">
             <a
