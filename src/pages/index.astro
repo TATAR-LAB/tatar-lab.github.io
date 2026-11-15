@@ -1,10 +1,6 @@
 ---
 import Layout from '~/layouts/PageLayout.astro';
-import Hero from '~/components/widgets/Hero.astro';
-import Features from '~/components/widgets/Features.astro';
-import Steps from '~/components/widgets/Steps.astro';
-
-import Stats from '~/components/widgets/Stats.astro';
+import Section from '~/components/ui/Section.astro';
 import Image from '~/components/common/Image.astro';
 import viceroyLogo from '~/assets/images/viceroy-logo.webp';
 import catisLogo from '~/assets/images/catis-logo.webp';
@@ -24,16 +20,61 @@ const metadata = {
   ignoreTitleTemplate: true,
 };
 
-// Shared card treatment: white panel, hairline border, navy icon chip, centered text.
-const cardClasses = {
-  items: {
-    panel:
-      'flex-col h-full max-w-none rounded-xl border border-slate-200 bg-white p-6 text-center shadow-sm',
-    icon: 'w-11 h-11 p-2.5 mb-4 mr-0 rtl:ml-0 rounded-lg bg-primary/5 text-primary ring-1 ring-primary/10',
-    title: 'text-lg md:text-lg font-bold leading-snug tracking-tight sm:min-h-[3.25rem]',
-    description: 'mt-2 text-[0.95rem] leading-relaxed text-muted',
+const mission = [
+  {
+    title: 'Quantify risk with evidence',
+    description:
+      'We build benchmarks, datasets, and evaluation frameworks that turn qualitative judgments about AI and cyber risk into measurements others can compare and audit.',
   },
-};
+  {
+    title: 'Model systemic and cascading risk',
+    description:
+      'Risk rarely stays where it starts. We trace how it spreads across interconnected systems, insurance portfolios, and critical infrastructure.',
+  },
+  {
+    title: 'Translate research into decisions',
+    description:
+      'We write for the people who act on our findings: security teams, insurers, regulators, and boards. Each of them gets results in the terms they already use.',
+  },
+  {
+    title: 'Develop the cybersecurity workforce',
+    description:
+      'Managing these risks takes skilled people. Through VICOR and lab projects, students get hands-on experience in cyber operations, AI security, and risk analysis before starting careers in the field.',
+  },
+];
+
+const research = [
+  {
+    title: 'Frontier AI & agentic security',
+    description:
+      'AI agents are starting to do real offensive and defensive security work. We red team frontier models and agents on realistic tasks to measure how far they get and what closes the gap between a low-cost model and a frontier one.',
+  },
+  {
+    title: 'LLM risk, safety & evaluation',
+    description:
+      'Comparing language models on security needs a shared measure. We build adversarial evaluations and scoring on established taxonomies, and trace how risk in a base model carries into the models built from it.',
+  },
+  {
+    title: 'Cyber & AI insurance',
+    description:
+      'Cyber risk is still hard to price. We study how catastrophic and systemic exposures behave and where policies written before AI leave coverage ambiguous.',
+  },
+  {
+    title: 'Economics of cybersecurity',
+    description:
+      'Organizations set security budgets under uncertainty, and the incentives rarely point where the risk is. We apply risk analysis, operations research, and economics to prioritize security investment and risk mitigation.',
+  },
+  {
+    title: 'Critical infrastructure',
+    description:
+      'Attacks on infrastructure do not stop at the system they hit. We model how disruptions cascade across healthcare, space, maritime, and other interconnected sectors, and study the new risks AI brings to industrial control systems.',
+  },
+  {
+    title: 'AI governance, oversight & policy',
+    description:
+      'Governing AI starts with a reliable record of how it fails in the world. We build that record and evaluate the tools meant to govern AI. We also study how people keep oversight of autonomous systems, and work on the policy and national security questions that follow.',
+  },
+].map((item, i) => ({ ...item, number: String(i + 1).padStart(2, '0'), anchor: `research-${i + 1}` }));
 
 const initiatives = [
   {
@@ -42,6 +83,7 @@ const initiatives = [
     description:
       'A multi-university cyber institute led by the University at Albany and funded by the Department of Defense. VICOR builds the operational skills of future cyber leaders through applied training, competitions, internships, and research placements.',
     image: viceroyLogo.src,
+    logoClass: 'max-h-11',
     href: 'https://cyberresearchgroup.org/',
     label: 'cyberresearchgroup.org',
   },
@@ -49,8 +91,9 @@ const initiatives = [
     name: 'CATIS',
     title: 'Cyber and Terrorism Insurance Studies',
     description:
-      'A cyber and terrorism insurance research center in its NSF funded planning phase, jointly led by the University at Albany and the University of Michigan. The planning grant, from the NSF Industry-University Cooperative Research Centers program, funds the work of bringing academic and industry partners together around catastrophic cyber and terrorism risk, insurance, and emerging technologies.',
+      'A research center on cyber and terrorism insurance, led jointly by the University at Albany and the University of Michigan. It is in a planning phase funded by the NSF Industry-University Cooperative Research Centers program, which brings academic and industry partners together on catastrophic cyber and terrorism risk, insurance, and emerging technologies.',
     image: catisLogo.src,
+    logoClass: 'max-h-14',
     href: 'https://catis.org',
     label: 'catis.org',
   },
@@ -68,33 +111,96 @@ const sponsors = [
   { name: 'Global Forum on Cyber Expertise', image: gfceLogo.src },
   { name: 'Society of Actuaries', image: soaLogo.src },
 ];
+
+const impact = [
+  {
+    title: 'Government & defense',
+    description: 'Research supported by and conducted with NSF, DoD, AFRL, ONR, NSA, NIST, and NATO.',
+  },
+  {
+    title: 'Industry & insurance',
+    description:
+      'Research projects for the Society of Actuaries and an NAIC research fellowship. We also work with insurers and risk practitioners on cyber risk quantification, third party risk, and the coverage questions AI raises.',
+  },
+  {
+    title: 'Students & workforce',
+    description:
+      'Curricula, cyber exercises, competitions, and funded research placements that put students on real operational problems and prepare them for cybersecurity jobs.',
+  },
+  {
+    title: 'Open research output',
+    description:
+      'We release benchmarks, datasets, evaluation harnesses, and agent tools publicly so others can reproduce, contest, and build on our results.',
+  },
+];
+
+const teamGroups = [
+  { label: 'Graduate students', members: [{ name: 'Hakan T. Otal', role: 'Lab manager' }] },
+  { label: 'Resident researchers', members: [{ name: 'Brianna Bace' }] },
+  {
+    label: 'Undergraduate students',
+    members: [
+      { name: 'Shayaan Khaliq' },
+      { name: 'Tyler H. Merves' },
+      { name: 'Joseph M. Escobar' },
+      { name: 'Michael H. Conaway' },
+      { name: 'Ahmet Salik' },
+      { name: 'Nicholas Spencer' },
+    ],
+  },
+  {
+    label: 'Non-resident researchers',
+    members: [{ name: 'C. Cagri Akgunduz' }, { name: 'Thora Knight' }, { name: 'Divij Jain' }],
+  },
+];
+
+const externalLink = { target: '_blank', rel: 'noopener noreferrer' };
 ---
 
 <Layout metadata={metadata}>
   <!-- Hero ******************* -->
-  <Hero>
-    <Fragment slot="title">
-      <span class="block text-3xl leading-tight text-slate-900 sm:text-4xl md:text-5xl">
-        <span class="text-accent">T</span>ransdisciplinary <span class="text-accent">A</span>pproaches to <span class="text-accent">T</span>hreat <span class="text-accent">A</span>nalysis and <span class="text-accent">R</span>esilience
-        <br>Laboratory
-      </span>
-      <!-- <span class="mt-4 block text-2xl font-bold tracking-tight text-primary sm:text-3xl md:text-4xl">TATAR Lab</span> -->
-      <span class="mt-3 block text-lg font-semibold tracking-normal text-slate-700 sm:text-xl md:text-2xl">
-        Quantifying cyber risk and securing AI
-      </span>
-    </Fragment>
+  <section class="not-prose relative">
+    <div class="mx-auto max-w-6xl px-4 pb-12 pt-16 sm:px-6 md:px-8 md:pb-16 md:pt-24">
+      <p class="text-sm font-medium text-primary">University at Albany, SUNY &middot; Department of Cybersecurity</p>
+      <h1
+        class="mt-5 max-w-4xl text-[2.25rem] font-semibold leading-[1.1] tracking-[-0.025em] text-heading sm:text-5xl md:text-[3.5rem] md:leading-[1.05] md:tracking-[-0.03em]"
+      >
+        <span class="text-accent">T</span>ransdisciplinary <span class="text-accent">A</span>pproaches to <span
+          class="text-accent">T</span
+        >hreat <span class="text-accent">A</span>nalysis and <span class="text-accent">R</span>esilience Laboratory
+      </h1>
 
-    <Fragment slot="subtitle">
-      <p class="mx-auto max-w-2xl text-lg leading-relaxed text-muted sm:text-xl">
-        A research lab at the University at Albany, SUNY, working on cyber risk and insurance, the security and safety
-        of AI systems, and the protection of critical infrastructure.
-      </p>
-    </Fragment>
+      <div class="mt-12 grid gap-12 border-t border-hairline pt-8 md:mt-16 md:grid-cols-12 md:gap-8">
+        <div class="md:col-span-6">
+          <p class="text-xl font-medium leading-7 text-heading">Quantifying cyber risk and securing AI</p>
+          <p class="mt-3 max-w-xl text-lg leading-relaxed text-muted">
+            We study cyber risk and insurance, the security and safety of AI systems, and the protection of critical
+            infrastructure.
+          </p>
+          <div class="mt-8 flex flex-col gap-3 sm:flex-row">
+            <a class="btn-primary w-full sm:w-auto" href="#research">Explore our research</a>
+            <a class="btn w-full sm:w-auto" href="#contact">Work with us</a>
+          </div>
+        </div>
 
-    <Fragment slot="content">
-      <div class="mt-10 flex flex-col items-center gap-4 sm:flex-row sm:justify-center">
-        <a class="btn-primary w-full sm:w-auto" href="#research">Explore our research</a>
-        <a class="btn w-full sm:w-auto" href="#contact">Work with us</a>
+        <nav class="md:col-span-5 md:col-start-8" aria-label="Research areas">
+          <p class="text-sm font-medium leading-7 text-muted">Research areas</p>
+          <ol class="mt-3 border-b border-hairline">
+            {
+              research.map((item) => (
+                <li class="border-t border-hairline">
+                  <a
+                    class="group flex items-baseline gap-4 py-3 text-[0.9375rem] text-default transition-colors duration-150 hover:text-primary"
+                    href={`#${item.anchor}`}
+                  >
+                    <span class="w-5 shrink-0 text-sm tabular-nums text-muted">{item.number}</span>
+                    <span class="group-hover:underline group-hover:underline-offset-4">{item.title}</span>
+                  </a>
+                </li>
+              ))
+            }
+          </ol>
+        </nav>
       </div>
 
       <!-- <div class="mt-14 border-t border-slate-200 pt-10">
@@ -112,200 +218,116 @@ const sponsors = [
           </a>
         </div>
       </div> -->
-    </Fragment>
-  </Hero>
+    </div>
+  </section>
 
-  <!-- Mission ******************* -->
-  <Features
+  <!-- Mission: four principles in a row ******************* -->
+  <Section
     id="mission"
-    tagline="Our mission"
+    label="Mission"
     title="Making cyber and AI risk measurable and manageable"
-    subtitle="We combine risk analysis, economics, engineering, and policy to answer questions no single discipline can settle on its own."
-    columns={2}
-    classes={cardClasses}
-    items={[
-      {
-        title: 'Quantify risk with evidence',
-        description:
-          'We build benchmarks, datasets, and evaluation frameworks that turn qualitative judgments about AI and cyber risk into measurements that can be compared and audited.',
-        icon: 'tabler:ruler-measure',
-      },
-      {
-        title: 'Model systemic and cascading risk',
-        description:
-          'Risk rarely stays where it starts. We trace how it spreads across interconnected systems, insurance portfolios, and critical infrastructure.',
-        icon: 'tabler:affiliate',
-      },
-      {
-        title: 'Translate research into decisions',
-        description:
-          'Our work is aimed at the people who act on it: security teams, insurers, regulators, and boards. We put findings in the language each of them uses.',
-        icon: 'tabler:target-arrow',
-      },
-      {
-        title: 'Develop the cybersecurity workforce',
-        description:
-          'Managing these risks takes skilled people. Through VICOR and lab research, students gain hands-on experience in cyber operations, AI security, and risk analysis that prepares them for careers in the field.',
-        icon: 'tabler:school',
-      },
-    ]}
+    intro="We combine risk analysis, economics, engineering, and policy to answer questions no single discipline can settle on its own."
+    rule
   >
-    <Fragment slot="bg">
-      <div class="absolute inset-0 bg-slate-50 dark:bg-transparent"></div>
-    </Fragment>
-  </Features>
+    <div class="grid gap-x-8 gap-y-10 sm:grid-cols-2 lg:grid-cols-4">
+      {
+        mission.map((item) => (
+          <div class="border-t border-hairline pt-5">
+            <h3 class="text-lg font-medium leading-snug text-heading lg:min-h-[3.25rem]">{item.title}</h3>
+            <p class="mt-3 text-[0.9375rem] leading-relaxed text-muted">{item.description}</p>
+          </div>
+        ))
+      }
+    </div>
+  </Section>
 
-  <!-- Research Focus Areas ******************* -->
-  <Features
+  <!-- Research: six numbered tiles on a muted band ******************* -->
+  <Section
     id="research"
-    tagline="What we work on"
     title="Research focus areas"
-    subtitle="Six threads run through the lab's current and past work. They overlap by design."
-    columns={3}
-    classes={cardClasses}
-    items={[
+    intro="The lab's current and past work falls into six areas, and most projects touch more than one."
+    tone="muted"
+    header="split"
+  >
+    <ol class="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
       {
-        title: 'Frontier AI & Agentic Security',
-        description:
-          'AI agents are starting to do real offensive and defensive security work. Red teaming frontier models and agents on realistic tasks shows how far they get and what closes the gap between a low-cost model and a frontier one.',
-        icon: 'tabler:robot',
-      },
-      {
-        title: 'LLM Risk, Safety & Evaluation',
-        description:
-          'Language models are hard to compare on security without a common yardstick. Adversarial evaluations and scoring built on established taxonomies provide that yardstick and trace how risk in a base model carries into everything derived from it.',
-        icon: 'tabler:shield-search',
-      },
-      {
-        title: 'Cyber & AI Insurance',
-        description:
-          'Cyber risk is still hard to price. This work examines how catastrophic and systemic exposures behave and where policies written before AI leave coverage ambiguous.',
-        icon: 'tabler:umbrella',
-      },
-      {
-        title: 'Economics of Cybersecurity',
-        description:
-          'Security budgets are set under uncertainty, and the incentives rarely point where the risk is. We apply risk analysis, operations research, and economics to prioritize security investment and risk mitigation.',
-        icon: 'tabler:chart-arrows',
-      },
-      {
-        title: 'Critical Infrastructure',
-        description:
-          'Attacks on infrastructure do not stop at the system they hit. We model how disruptions cascade across healthcare, space, maritime, and other interconnected sectors, and study the new risks AI brings to industrial control systems.',
-        icon: 'tabler:building-broadcast-tower',
-      },
-      {
-        title: 'AI Governance, Oversight & Policy',
-        description:
-          'Governing AI starts with a reliable record of how it fails in the world. We build that record, evaluate the tooling meant to govern AI, study how people keep effective oversight of autonomous systems, and work on the policy and national security questions that follow.',
-        icon: 'tabler:scale',
-      },
-    ]}
-  />
+        research.map((item) => (
+          <li id={item.anchor} class="scroll-mt-24 rounded-lg border border-hairline bg-white p-6 md:p-8">
+            <span class="text-sm font-medium tabular-nums text-primary">{item.number}</span>
+            <h3 class="mt-4 text-xl font-semibold leading-snug tracking-[-0.01em] text-heading">{item.title}</h3>
+            <p class="mt-3 text-[0.9375rem] leading-relaxed text-muted">{item.description}</p>
+          </li>
+        ))
+      }
+    </ol>
+  </Section>
 
-  <!-- Research Sponsors ******************* -->
-  <section id="sponsors" class="not-prose relative scroll-mt-[72px]">
-    <div class="relative mx-auto max-w-5xl px-4 pb-12 text-default md:px-6 md:pb-16 lg:pb-20">
-      <div class="border-t border-slate-200 pt-12 md:pt-16">
-        <div class="mb-8 text-center md:mx-auto md:mb-12 md:max-w-3xl">
-          <p class="text-base font-bold uppercase tracking-wide text-secondary">Research sponsors</p>
-          <h2 class="font-heading text-3xl font-bold leading-tight tracking-tighter md:text-4xl">Supported by</h2>
-          <p class="mt-4 text-xl text-muted">Our research has been supported by these agencies and organizations.</p>
-        </div>
-
-        <div class="grid grid-cols-2 gap-x-6 gap-y-10 md:grid-cols-5">
-          {
-            sponsors.map((sponsor) => (
-              <div class="flex flex-col items-center text-center">
-                <div class="flex h-16 w-full items-center justify-center">
-                  <img
-                    class="max-h-16 max-w-full object-contain sm:max-w-[10rem]"
-                    src={sponsor.image}
-                    alt=""
-                    loading="lazy"
-                  />
-                </div>
-                <p class="mt-3 text-sm font-medium text-muted">{sponsor.name}</p>
-              </div>
-            ))
-          }
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Flagship Initiatives ******************* -->
-  <section id="initiatives" class="not-prose relative scroll-mt-[72px]">
-    <div class="absolute inset-0 -z-[1] bg-slate-50 dark:bg-transparent" aria-hidden="true"></div>
-    <div class="relative mx-auto max-w-5xl px-4 py-12 text-default md:px-6 md:py-16 lg:py-20">
-      <div class="mb-8 text-center md:mx-auto md:mb-12 md:max-w-3xl">
-        <p class="text-base font-bold uppercase tracking-wide text-secondary">At scale</p>
-        <h2 class="font-heading text-3xl font-bold leading-tight tracking-tighter md:text-4xl">Multi-institutional initiatives</h2>
-        <p class="mt-4 text-xl text-muted">
-          Beyond individual projects, the lab leads larger efforts that bring together universities, government, and
-          industry.
-        </p>
-      </div>
-
-      <div class="grid gap-8 sm:grid-cols-2">
-        {
-          initiatives.map((item) => (
-            <div class="flex h-full flex-col rounded-xl border border-slate-200 bg-white p-7 text-center shadow-sm sm:text-left">
-              <div class="mx-auto mb-4 p-4">
-                <img
-                  class="mx-auto h-auto max-h-14 w-auto object-contain"
-                  src={item.image}
-                  alt={`${item.name} logo`}
-                  loading="lazy"
-                />
-              </div>
-              <p class="text-xs font-bold uppercase tracking-[0.16em] text-secondary">{item.name}</p>
-              <h3 class="mt-1 text-xl sm:min-h-[3.5rem] font-bold leading-snug tracking-tight">{item.title}</h3>
-              <p class="mt-3 text-[0.95rem] leading-relaxed text-muted">{item.description}</p>
-              <div class="mt-auto flex flex-wrap items-center justify-center gap-x-4 gap-y-2 pt-6 sm:justify-start">
-                <a class="btn-primary px-5 py-2.5 text-sm" href={item.href} target="_blank" rel="noopener noreferrer">
-                  Read more
-                </a>
-                <span class="text-sm text-muted">{item.label}</span>
-              </div>
+  <!-- Research Sponsors: logo wall ******************* -->
+  <Section
+    id="sponsors"
+    title="Research sponsors"
+    intro="These agencies and organizations have supported the lab's research."
+    header="split"
+  >
+    <ul class="grid grid-cols-2 gap-x-8 gap-y-12 sm:grid-cols-3 lg:grid-cols-5">
+      {
+        sponsors.map((sponsor) => (
+          <li class="flex flex-col items-center text-center">
+            <div class="flex h-14 w-full items-center justify-center">
+              <img class="max-h-14 max-w-[9rem] object-contain" src={sponsor.image} alt="" loading="lazy" />
             </div>
-          ))
-        }
-      </div>
-    </div>
-  </section>
+            <p class="mt-4 max-w-[12rem] text-[0.8125rem] leading-snug text-muted">{sponsor.name}</p>
+          </li>
+        ))
+      }
+    </ul>
+  </Section>
 
-  <!-- Impact ******************* -->
-  <Steps
-    tagline="Impact"
-    title="Who our research serves"
-    items={[
+  <!-- Flagship Initiatives: two halves split by a rule ******************* -->
+  <Section
+    id="initiatives"
+    title="Multi-institutional initiatives"
+    intro="Beyond individual projects, the lab leads larger efforts that bring together universities, government, and industry."
+    rule
+  >
+    <div class="grid gap-12 md:grid-cols-2 md:gap-0 md:divide-x md:divide-hairline">
       {
-        title: 'Government & defense',
-        description:
-          'Research supported by and conducted with NSF, DoD, AFRL, ONR, NSA, NIST, and NATO.',
-        icon: 'tabler:building-castle',
-      },
+        initiatives.map((item, i) => (
+          <article class:list={['flex flex-col', i === 0 ? 'md:pr-12' : 'md:pl-12']}>
+            <div class="flex h-14 items-center">
+              <img
+                class:list={['max-w-[12rem] object-contain', item.logoClass]}
+                src={item.image}
+                alt={`${item.name} logo`}
+                loading="lazy"
+              />
+            </div>
+            <p class="mt-6 text-sm font-medium text-primary">{item.name}</p>
+            <h3 class="mt-2 text-2xl font-semibold leading-snug tracking-[-0.01em] text-heading">{item.title}</h3>
+            <p class="mt-4 text-base leading-relaxed text-muted">{item.description}</p>
+            <a class="link-arrow mt-auto pt-8" href={item.href} {...externalLink}>
+              {item.label}
+              <span aria-hidden="true">↗</span>
+            </a>
+          </article>
+        ))
+      }
+    </div>
+  </Section>
+
+  <!-- Impact: navy band ******************* -->
+  <Section id="impact" label="Impact" title="Who our research serves" tone="dark">
+    <dl class="grid gap-x-8 gap-y-10 sm:grid-cols-2">
       {
-        title: 'Industry & insurance',
-        description:
-          'Society of Actuaries research projects and an NAIC research fellowship, alongside work with insurers and risk practitioners on cyber risk quantification, third party risk, and the coverage questions raised by AI.',
-        icon: 'tabler:briefcase',
-      },
-      {
-        title: 'Students & workforce',
-        description:
-          'Curricula, cyber exercises, competitions, and funded research placements that move students into real operational problems and into the cybersecurity workforce.',
-        icon: 'tabler:users',
-      },
-      {
-        title: 'Open research output',
-        description:
-          'Benchmarks, datasets, evaluation harnesses, and agent tooling released publicly so results can be reproduced, contested, and built on.',
-        icon: 'tabler:brand-github',
-      },
-    ]}
-  />
+        impact.map((item) => (
+          <div class="border-t border-white/15 pt-6">
+            <dt class="text-xl font-semibold text-white">{item.title}</dt>
+            <dd class="mt-3 max-w-md text-base leading-relaxed text-white/70">{item.description}</dd>
+          </div>
+        ))
+      }
+    </dl>
+  </Section>
 
   <!-- Stats ******************* -->
   <!-- <Stats
@@ -321,169 +343,106 @@ const sponsors = [
     </Fragment>
   </Stats> -->
 
-  <!-- Team ******************* -->
-  <section id="team" class="not-prose relative scroll-mt-[72px]">
-    <div class="absolute inset-0 -z-[1] bg-slate-50 dark:bg-transparent" aria-hidden="true"></div>
-    <div class="relative mx-auto max-w-5xl px-4 py-12 text-default md:px-6 md:py-16 lg:py-20">
-      <div class="mb-8 text-center md:mx-auto md:mb-12 md:max-w-3xl">
-        <p class="text-base font-bold uppercase tracking-wide text-secondary">Who we are</p>
-        <h2 class="font-heading text-3xl font-bold leading-tight tracking-tighter md:text-4xl">Team</h2>
-      </div>
-
-      <!-- Director -->
-      <div
-        class="mb-8 flex flex-col items-center gap-6 rounded-xl border border-slate-200 bg-white p-6 text-center shadow-sm sm:flex-row sm:items-start sm:gap-8 sm:p-8 sm:text-left"
-      >
+  <!-- Team: director feature, then four group columns ******************* -->
+  <Section id="team" title="Team">
+    <div class="grid gap-8 md:grid-cols-12">
+      <div class="w-40 md:col-span-3 md:w-full">
         <Image
-          class="h-36 w-36 shrink-0 rounded-full object-cover"
+          class="aspect-square w-full rounded-lg object-cover"
           src="~/assets/images/tatar.jpg"
           alt="Portrait of Dr. Unal Tatar"
-          width={144}
-          height={144}
-          layout="fixed"
+          width={400}
+          height={400}
           loading="lazy"
         />
-        <div>
-          <p class="text-sm font-bold uppercase tracking-wide text-secondary">Director</p>
-          <h3 class="mb-3 mt-1 text-2xl font-bold tracking-tight dark:text-white">Dr. Unal Tatar</h3>
-          <p class="text-base leading-relaxed text-muted">
-            Associate Professor in the Department of Cybersecurity at the University at Albany, working at the intersection
-            of cybersecurity, AI, risk analysis, and insurance. He is the lead principal investigator of the DoD funded
-            VICOR institute, leads the NSF funded planning phase of the
-            <a class="font-semibold text-primary hover:underline" href="https://catis.org" target="_blank" rel="noopener noreferrer">CATIS Center</a>
-            for cyber and terrorism insurance research, and is a co-principal investigator of
-            <a class="font-semibold text-primary hover:underline" href="https://www.albany.edu/cehc/crest" target="_blank" rel="noopener noreferrer">CREST</a>,
-            UAlbany&rsquo;s NIST funded Cybersecurity Incident Response Studio.
-            He has secured over $5 million in grants and contracts in cybersecurity and AI and was named a Research Fellow by
-            the National Association of Insurance Commissioners. Before joining academia he headed Turkey&rsquo;s national
-            CERT and advised NATO&rsquo;s Centre of Excellence for Defence Against Terrorism.
-          </p>
-          <div class="mt-4 flex flex-wrap gap-x-6 text-sm font-semibold text-primary">
-            <a
-              class="inline-block py-2.5 hover:underline"
-              href="https://www.albany.edu/cehc/faculty/unal-tatar"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              Faculty profile
-            </a>
-            <a
-              class="inline-block py-2.5 hover:underline"
-              href="https://scholar.google.com/citations?user=3agv4kcAAAAJ&hl=en"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              Google Scholar
-            </a>
-            <a
-              class="inline-block py-2.5 hover:underline"
-              href="https://www.linkedin.com/in/utatar"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              LinkedIn
-            </a>
-          </div>
-        </div>
       </div>
-
-      <!-- Team Members -->
-      <div class="grid gap-8 sm:grid-cols-2">
-        <!-- Graduate Students -->
-        <div class="rounded-xl border border-slate-200 bg-white p-6 shadow-sm">
-          <h4 class="mb-4 text-sm font-bold uppercase tracking-wide text-secondary">Graduate Students</h4>
-          <ul class="space-y-3">
-            <li class="text-lg font-semibold text-default">
-              Hakan T. Otal <span class="font-normal text-muted">(Lab Manager)</span>
-            </li>
-          </ul>
-        </div>
-
-        <!-- Resident Researchers -->
-        <div class="rounded-xl border border-slate-200 bg-white p-6 shadow-sm">
-          <h4 class="mb-4 text-sm font-bold uppercase tracking-wide text-secondary">Resident Researchers</h4>
-          <ul class="space-y-3">
-            <li class="text-lg font-semibold text-default">Brianna Bace</li>
-          </ul>
-        </div>
-
-        <!-- Undergraduate Students -->
-        <div class="rounded-xl border border-slate-200 bg-white p-6 shadow-sm">
-          <h4 class="mb-4 text-sm font-bold uppercase tracking-wide text-secondary">Undergraduate Students</h4>
-          <ul class="space-y-3">
-            <li class="text-lg font-semibold text-default">Shayaan Khaliq</li>
-            <li class="text-lg font-semibold text-default">Tyler H. Merves</li>
-            <li class="text-lg font-semibold text-default">Joseph M. Escobar</li>
-            <li class="text-lg font-semibold text-default">Michael H. Conaway</li>
-            <li class="text-lg font-semibold text-default">Ahmet Salik</li>
-            <li class="text-lg font-semibold text-default">Nicholas Spencer</li>
-          </ul>
-        </div>
-
-        <!-- Non-Resident Researchers -->
-        <div class="rounded-xl border border-slate-200 bg-white p-6 shadow-sm">
-          <h4 class="mb-4 text-sm font-bold uppercase tracking-wide text-secondary">Non-Resident Researchers</h4>
-          <ul class="space-y-3">
-            <li class="text-lg font-semibold text-default">C. Cagri Akgunduz</li>
-            <li class="text-lg font-semibold text-default">Thora Knight</li>
-            <li class="text-lg font-semibold text-default">Divij Jain</li>
-          </ul>
+      <div class="md:col-span-8 md:col-start-4">
+        <p class="text-sm font-medium text-primary">Director</p>
+        <h3 class="mt-2 text-2xl font-semibold tracking-[-0.01em] text-heading">Dr. Unal Tatar</h3>
+        <p class="mt-4 text-base leading-relaxed text-default">
+          Associate Professor in the Department of Cybersecurity at the University at Albany. His work combines
+          cybersecurity, AI, risk analysis, and insurance. He is the lead principal investigator of the DoD funded VICOR
+          institute and leads the NSF funded planning phase of the
+          <a class="text-link" href="https://catis.org" {...externalLink}>CATIS Center</a>
+          for cyber and terrorism insurance research. He is also a co-principal investigator of
+          <a class="text-link" href="https://www.albany.edu/cehc/crest" {...externalLink}>CREST</a>, UAlbany's NIST
+          funded Cybersecurity Incident Response Studio. He has secured over $5 million in grants and contracts in
+          cybersecurity and AI, and the National Association of Insurance Commissioners named him a Research Fellow.
+          Before joining academia he headed Turkey's national CERT and advised NATO's Centre of Excellence for Defence
+          Against Terrorism.
+        </p>
+        <div class="mt-6 flex flex-wrap gap-x-6 gap-y-2">
+          <a class="link-arrow" href="https://www.albany.edu/cehc/faculty/unal-tatar" {...externalLink}>
+            Faculty profile <span aria-hidden="true">↗</span>
+          </a>
+          <a class="link-arrow" href="https://scholar.google.com/citations?user=3agv4kcAAAAJ&hl=en" {...externalLink}>
+            Google Scholar <span aria-hidden="true">↗</span>
+          </a>
+          <a class="link-arrow" href="https://www.linkedin.com/in/utatar" {...externalLink}>
+            LinkedIn <span aria-hidden="true">↗</span>
+          </a>
         </div>
       </div>
     </div>
-  </section>
+
+    <div class="mt-16 grid gap-x-8 gap-y-10 sm:grid-cols-2 lg:grid-cols-4">
+      {
+        teamGroups.map((group) => (
+          <div class="border-t border-hairline pt-5">
+            <h4 class="text-sm font-medium text-muted">{group.label}</h4>
+            <ul class="mt-4 space-y-2">
+              {group.members.map((member) => (
+                <li class="text-base text-heading">
+                  {member.name}
+                  {member.role && <span class="block text-sm text-muted">{member.role}</span>}
+                </li>
+              ))}
+            </ul>
+          </div>
+        ))
+      }
+    </div>
+  </Section>
 
   <!-- Contact ******************* -->
-  <section id="contact" class="not-prose relative scroll-mt-[72px]">
-    <div class="absolute inset-0 -z-[1] bg-slate-50 dark:bg-transparent" aria-hidden="true"></div>
-    <div class="relative mx-auto max-w-5xl px-6 py-12 text-default md:px-8 md:py-16 lg:py-20">
-      <div class="grid items-center gap-10 md:grid-cols-2 md:gap-14">
-        <div>
-          <p class="text-base font-bold uppercase tracking-wide text-secondary">Contact</p>
-          <h2 class="mt-2 font-heading text-3xl font-bold leading-tight tracking-tighter md:text-4xl">
-            Work with the lab
-          </h2>
-          <p class="mt-4 text-lg text-muted">
-            We are glad to hear from prospective graduate and undergraduate students, and from collaborators in
-            government, industry, and insurance. A short note about what you are working on is the best place to start.
-          </p>
-          <a class="btn-primary mt-8 inline-flex" href="mailto:utatar@albany.edu">Get in touch</a>
-        </div>
-
-        <div class="rounded-xl border border-slate-200 bg-white p-7 shadow-sm">
-          <dl class="space-y-6">
-            <div>
-              <dt class="text-xs font-semibold uppercase tracking-[0.14em] text-muted">Email</dt>
-              <dd class="mt-1 text-lg">
-                <a class="inline-block py-1 font-semibold text-primary hover:underline" href="mailto:utatar@albany.edu">
-                  utatar@albany.edu
-                </a>
-              </dd>
-            </div>
-            <div>
-              <dt class="text-xs font-semibold uppercase tracking-[0.14em] text-muted">Lab location</dt>
-              <dd class="mt-1 text-base leading-relaxed">
-                ETEC Building, Room 350P<br />
-                1220 Washington Avenue<br />
-                Albany, NY 12203
-              </dd>
-            </div>
-            <div>
-              <dt class="text-xs font-semibold uppercase tracking-[0.14em] text-muted">Code &amp; data</dt>
-              <dd class="mt-1 text-base">
-                <a
-                  class="inline-block py-1 font-semibold text-primary hover:underline"
-                  href="https://github.com/TATAR-LAB"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  github.com/TATAR-LAB
-                </a>
-              </dd>
-            </div>
-          </dl>
-        </div>
+  <Section id="contact" tone="muted">
+    <div class="grid gap-12 md:grid-cols-12 md:gap-8">
+      <div class="md:col-span-6">
+        <p class="text-sm font-medium text-primary">Contact</p>
+        <h2
+          class="mt-3 text-3xl font-semibold leading-tight tracking-[-0.02em] text-heading md:text-[2.5rem] md:leading-[1.15]"
+        >
+          Work with the lab
+        </h2>
+        <p class="mt-4 max-w-xl text-lg leading-relaxed text-muted">
+          We are glad to hear from prospective graduate and undergraduate students, and from collaborators in
+          government, industry, and insurance. A short note about what you are working on is the best place to start.
+        </p>
+        <a class="btn-primary mt-8 inline-flex" href="mailto:utatar@albany.edu">Get in touch</a>
       </div>
+
+      <dl class="border-b border-hairline md:col-span-5 md:col-start-8">
+        <div class="border-t border-hairline py-5">
+          <dt class="text-sm text-muted">Email</dt>
+          <dd class="mt-1 text-lg">
+            <a class="text-link" href="mailto:utatar@albany.edu">utatar@albany.edu</a>
+          </dd>
+        </div>
+        <div class="border-t border-hairline py-5">
+          <dt class="text-sm text-muted">Lab location</dt>
+          <dd class="mt-1 text-base leading-relaxed text-heading">
+            ETEC Building, Room 350P<br />
+            1220 Washington Avenue<br />
+            Albany, NY 12203
+          </dd>
+        </div>
+        <div class="border-t border-hairline py-5">
+          <dt class="text-sm text-muted">Code &amp; data</dt>
+          <dd class="mt-1 text-base">
+            <a class="text-link" href="https://github.com/TATAR-LAB" {...externalLink}>github.com/TATAR-LAB</a>
+          </dd>
+        </div>
+      </dl>
     </div>
-  </section>
+  </Section>
 </Layout>

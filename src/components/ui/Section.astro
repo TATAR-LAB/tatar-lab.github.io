@@ -1,0 +1,70 @@
+---
+// One section frame for the whole page: same container, same vertical rhythm,
+// same header. Variety comes from the content and the tone, not from the frame.
+//   tone:   light (white), muted (slate-50 band) or dark (navy band)
+//   header: stacked (label, title, intro in one column) or split (title left, intro right)
+//   rule:   hairline at the top, for two light sections in a row
+export interface Props {
+  id?: string;
+  label?: string;
+  title?: string;
+  intro?: string;
+  tone?: 'light' | 'muted' | 'dark';
+  header?: 'stacked' | 'split';
+  rule?: boolean;
+}
+
+const { id, label, title, intro, tone = 'light', header = 'stacked', rule = false } = Astro.props;
+const dark = tone === 'dark';
+const hasHeader = Boolean(label || title || intro);
+---
+
+<section
+  id={id}
+  class:list={[
+    'not-prose relative scroll-mt-[72px]',
+    { 'bg-slate-50': tone === 'muted', 'bg-[#13204a] text-white': dark },
+  ]}
+>
+  <div class="mx-auto max-w-6xl px-4 sm:px-6 md:px-8">
+    <div class:list={['py-16 md:py-24', { 'border-t border-hairline': rule }]}>
+      {
+        hasHeader && (
+          <header
+            class:list={[
+              'mb-12 md:mb-16',
+              header === 'split' ? 'grid gap-4 md:grid-cols-12 md:items-end md:gap-8' : 'max-w-3xl',
+            ]}
+          >
+            <div class:list={[{ 'md:col-span-6': header === 'split' }]}>
+              {label && <p class:list={['text-sm font-medium', dark ? 'text-sky-300' : 'text-primary']}>{label}</p>}
+              {title && (
+                <h2
+                  class:list={[
+                    'text-3xl font-semibold leading-tight tracking-[-0.02em] md:text-[2.5rem] md:leading-[1.15]',
+                    dark ? 'text-white' : 'text-heading',
+                    { 'mt-3': label },
+                  ]}
+                >
+                  {title}
+                </h2>
+              )}
+            </div>
+            {intro && (
+              <p
+                class:list={[
+                  'max-w-2xl text-lg leading-relaxed',
+                  header === 'split' ? 'md:col-span-5 md:col-start-8' : 'mt-4',
+                  dark ? 'text-white/70' : 'text-muted',
+                ]}
+              >
+                {intro}
+              </p>
+            )}
+          </header>
+        )
+      }
+      <slot />
+    </div>
+  </div>
+</section>
